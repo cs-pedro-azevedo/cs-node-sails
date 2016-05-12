@@ -14,19 +14,19 @@ RUN npm install pm2 -g
 EXPOSE 1337
 
 ## Add a limited user and give him permission on the entrypoint dir
-RUN mkdir -p /entrypoint/app
+RUN mkdir -p /app/node-sails
 RUN /usr/sbin/groupadd node -g 1000
-RUN /usr/sbin/useradd -m node -g 1000 -u 1000 -d /entrypoint
-RUN chown -R 1000:1000 /entrypoint
+RUN /usr/sbin/useradd -m node -g 1000 -u 1000 -d /app/
+RUN chown -R 1000:1000 /app
 
 ## The /entrypoint volume must be mounted with the root of the
 ## node.js application
-VOLUME /entrypoint
+VOLUME /app
 
 ## Change the user to node and the dir to the Youse directory,
 ## which is where the process must to be started
 USER node
-WORKDIR /entrypoint/app
+WORKDIR /app/node-sails
 
 ## Start the main app using PM2
 CMD pm2 start app.js --no-daemon
