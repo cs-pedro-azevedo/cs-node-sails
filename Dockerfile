@@ -1,8 +1,17 @@
-## The default node JS is being used. Change this to
-## upgrade the Node.JS Version
-FROM node:5.5.0
+## The default CentOS image has been used.
+FROM centos:latest
+MAINTAINER Pedro Cesar Azevedo <pedro.azevedo@concretesolutions.com.br>
 
-MAINTAINER Heucles Junior <heucles.junior@concretesolutions.com.br>
+## Install basic tools 
+RUN yum install git lftp xorg-x11-fonts-Type1 xorg-x11-fonts-75dpi libpng libjpeg-turbo openssl libX11 libXext	libXrender -y
+
+## Download and install wikitools
+RUN curl -O http://download.gna.org/wkhtmltopdf/0.12/0.12.2.1/wkhtmltox-0.12.2.1_linux-centos7-amd64.rpm
+RUN rpm -Uvh wkhtmltox-0.12.2.1_linux-centos7-amd64.rpm
+
+## Install repository, Node.JS and other tools.
+RUN curl --silent --location https://rpm.nodesource.com/setup_5.x | bash -
+RUN yum install nodejs bzip2 gcc gcc-c++ make freetype-devel fontconfig-devel -y
 
 ## Install the Sails framework globally
 RUN npm install -g sails
