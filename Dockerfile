@@ -1,6 +1,6 @@
 ## The default node JS is being used. Change this to
 ## upgrade the Node.JS Version
-FROM node:5.5.0
+FROM node:5.11.0
 
 MAINTAINER Heucles Junior <heucles.junior@concretesolutions.com.br>
 
